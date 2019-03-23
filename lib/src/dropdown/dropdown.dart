@@ -1,9 +1,7 @@
 part of bs_dropdown;
 
 class AutoClose {
-  static const ALWAYS = "always",
-               DISABLED = 'disabled',
-               OUTSIDE_CLICK = 'outsideClick';
+  static const ALWAYS = "always", DISABLED = 'disabled', OUTSIDE_CLICK = 'outsideClick';
 }
 
 @Directive(selector: "bs-dropdown, .dropdown")
@@ -60,7 +58,7 @@ class BsDropdownDirective implements OnInit, OnDestroy, AfterContentInit {
       _focusToggleElement();
 
       _closeDropdownStSub = window.onClick.listen((_) => isOpen = false);
-      _keybindFilterStSub = window.onKeyDown.listen(_keybindFilter);
+      _keybindFilterStSub = window.onKeyDown.listen(_keyBindFilter);
 //      dropdownService.open(this);
     } else {
 //      dropdownService.close(this);
@@ -158,7 +156,7 @@ class BsDropdownDirective implements OnInit, OnDestroy, AfterContentInit {
     dropdownToggle.elementRef.focus();
   }
 
-  _keybindFilter(KeyboardEvent event) {
+  _keyBindFilter(KeyboardEvent event) {
     if (event.which == KeyCode.ESC) {
       _focusToggleElement();
       isOpen = false;

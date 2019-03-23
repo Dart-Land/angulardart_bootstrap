@@ -1,9 +1,7 @@
 import "package:angular/angular.dart";
 import 'package:angulardart_bootstrap/angulardart_bootstrap.dart';
 
-@Component(selector: "pagination-demo",
-    templateUrl: "pagination_demo.html",
-    directives: const [BsPaginationComponent, BsPagerComponent])
+@Component(selector: "pagination-demo", templateUrl: "pagination_demo.html", directives: const [BsPaginationComponent, BsPagerComponent])
 class PaginationDemo {
   int totalItems = 64;
   int currentPage = 4;
@@ -17,7 +15,7 @@ class PaginationDemo {
     currentPage = pageNo;
   }
 
-//  void pageChanged() {
-//    print("Page changed to: $currentPage");
-//  }
+  void pageChanged() {
+    print("Page changed to: $currentPage");
+  }
 }

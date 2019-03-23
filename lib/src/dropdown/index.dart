@@ -9,8 +9,8 @@ import 'package:js_shims/js_shims.dart';
 part "dropdown.dart";
 part "menu.dart";
 part "toggle.dart";
-//part "keyboard_nav.dart";
 
+//part "keyboard_nav.dart";
 const bsDropdownDirectives = [BsDropdownDirective, BsDropdownMenuDirective, BsDropdownToggleDirective];
 
 @Deprecated('Renamed to "bsDropdownDirectives')

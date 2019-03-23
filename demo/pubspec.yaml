@@ -1,20 +1,20 @@
 name: angulardart_bootstrap_demo
 version: 0.0.1
 description: angulardart_bootstrap demo gh-page
-authors:
-  - Luis Vargas <luisvargastijerino@gmail.com>
-  - Adao Jr. <itsjunnior@gmail.com>
 dependencies:
+  angular: ^5.2.0
+  angular_forms: ^2.1.1
+  angular_router: ^2.0.0-alpha+21
   string_converters: ^1.0.0
   angular: any
   dson: ^0.15.2
-#  angulardart_bootstrap: ^0.6.3
+#  angulardart_bootstrap: ^1.0.0-rev3
   angulardart_bootstrap:
     path: ..
 #    git: https://github.com/dart-land/angulardart_bootstrap
 dev_dependencies:
-  sass_builder: ^2.1.1
-#  sass_builder:
-#    path: ../sass_builder
-  build_runner: any
-  build_web_compilers: any
+  test: ^1.5.1
+  angular_test: ^2.1.0
+  build_test: ^0.10.3+3
+  build_runner: ^1.1.2
+  sass_builder: ^2.1.2

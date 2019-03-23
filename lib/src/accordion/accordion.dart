@@ -1,8 +1,10 @@
+import 'dart:async';
+import 'dart:html';
+
 import 'package:angular/angular.dart';
 import 'package:js_shims/js_shims.dart';
-import 'dart:html';
-import 'dart:async';
-import 'package:angulardart_bootstrap/components/collapse/collapse.dart';
+
+import '../collapse/collapse.dart';
 
 /// List of directives needed to create an accordion
 @Deprecated('Renamed to `bsAccordionDirectives`')
@@ -18,13 +20,16 @@ const bsAccordionDirectives = const [BsAccordionComponent, BsAccordionPanelCompo
 /// or [bootstrap 4](http://v4-alpha.getbootstrap.com/components/collapse/#accordion-example)
 ///
 /// [demo](http://dart-land.github.io/angulardart_bootstrap/#accordion)
-@Component (selector: 'bs-accordion',
+@Component(
+  selector: 'bs-accordion',
 //    host: const { '[class.panel-group]' : 'true'},
-    template: '<ng-content></ng-content>',
-    directives: const [coreDirectives, BsAccordionPanelComponent])
+  template: '<ng-content></ng-content>',
+  directives: const [coreDirectives, BsAccordionPanelComponent],
+)
 class BsAccordionComponent implements AfterContentInit {
   /// if `true` expanding one item will close all others
-  @Input() bool closeOthers;
+  @Input()
+  bool closeOthers;
 
   /// provides the list of children panels
   @ContentChildren(BsAccordionPanelComponent)
@@ -61,9 +66,7 @@ class BsAccordionComponent implements AfterContentInit {
 /// Creates an accordion-panel
 ///
 /// [demo](http://dart-land.github.io/angulardart_bootstrap/#accordion)
-@Component(selector: 'bs-accordion-panel',
-    templateUrl: 'accordion_panel.html',
-    directives: const [BsCollapseDirective, coreDirectives])
+@Component(selector: 'bs-accordion-panel', templateUrl: 'accordion_panel.html', directives: const [BsCollapseDirective, coreDirectives])
 class BsAccordionPanelComponent implements OnInit {
   /// Constructs a new [BsAccordionPanelComponent] injecting the parent [BsAccordionComponent]
   BsAccordionPanelComponent();
@@ -76,13 +79,16 @@ class BsAccordionPanelComponent implements OnInit {
 
   /// provides an ability to use Bootstrap's contextual panel classes (`panel-primary`, `panel-success`,
   /// `panel-info`, etc...). List of all available classes [link](http://getbootstrap.com/components/#panels-alternatives)
-  @Input() String panelClass;
+  @Input()
+  String panelClass;
 
   /// clickable text in accordion's group header
-  @Input() String heading;
+  @Input()
+  String heading;
 
   /// if `true` disables accordion group
-  @Input() bool isDisabled = false;
+  @Input()
+  bool isDisabled = false;
 
   bool _isOpen = false;
 
@@ -91,8 +97,10 @@ class BsAccordionPanelComponent implements OnInit {
   bool get isOpen => _isOpen;
 
   final _isOpenChangeCtrl = new StreamController<bool>.broadcast();
+
   /// emits if the panel [isOpen]
-  @Output() Stream<bool> get isOpenChange => _isOpenChangeCtrl.stream;
+  @Output()
+  Stream<bool> get isOpenChange => _isOpenChangeCtrl.stream;
 
   /// if `true` opens the panel
   @Input()
@@ -104,7 +112,6 @@ class BsAccordionPanelComponent implements OnInit {
         parentAccordion.closeOtherPanels(this);
       }
       _isOpenChangeCtrl.add(value);
-
     });
   }
 

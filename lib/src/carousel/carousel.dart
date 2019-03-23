@@ -1,10 +1,10 @@
-import "package:angular/angular.dart";
-
-import "package:js_shims/js_shims.dart";
 import 'dart:async';
 
+import "package:angular/angular.dart";
+import "package:js_shims/js_shims.dart";
+
 /// List of Directives needed to create a carousel
-const bsCarouselComponents = [BsCarouselComponent, BsSlideComponent];
+const bsCarouselComponents = const [BsCarouselComponent, BsSlideComponent];
 
 @Deprecated('Renamed to "bsCarouselComponents"')
 const angulardart_bootstrap_CAROUSEL_DIRECTIVES = bsCarouselComponents;
@@ -19,16 +19,23 @@ enum Direction { UNKNOWN, NEXT, PREV }
 /// [bootstrap 4](http://v4-alpha.getbootstrap.com/components/carousel/)
 ///
 /// [demo](http://dart-land.github.io/angulardart_bootstrap/#carousel)
-@Component(selector: "bs-carousel", templateUrl: 'carousel.html', directives: const [coreDirectives])
+@Component(
+  selector: "bs-carousel",
+  templateUrl: 'carousel.html',
+  directives: const [coreDirectives],
+)
 class BsCarouselComponent implements OnDestroy, AfterContentInit {
   /// if `true` will disable pausing on carousel mouse hover
-  @Input() bool noPause = false;
+  @Input()
+  bool noPause = false;
 
   /// if `true` the carousel will not cycle continuously and will have hard stops (prevent looping)
-  @Input() bool noWrap;
+  @Input()
+  bool noWrap;
 
   /// if `true` the carousel is not going to have transitions between slides
-  @Input() bool noTransition;
+  @Input()
+  bool noTransition;
 
   /// provides the slides of the carousel
   @ContentChildren(BsSlideComponent)
@@ -47,7 +54,8 @@ class BsCarouselComponent implements OnDestroy, AfterContentInit {
   BsSlideComponent currentSlide;
 
   /// amount of time in milliseconds to delay between automatically cycling an item. If `false`, carousel will not automatically cycle
-  @Input() num interval;
+  @Input()
+  num interval;
 
   @override
   ngAfterContentInit() {
@@ -185,13 +193,14 @@ class BsCarouselComponent implements OnDestroy, AfterContentInit {
 ///
 /// [demo](http://dart-land.github.io/angulardart_bootstrap/#carousel)
 @Component(
-    selector: "bs-slide",
-    template: '''
+  selector: "bs-slide",
+  template: '''
   <div class="text-center">
     <ng-content></ng-content>
   </div>
   ''',
-    directives: const [NgClass])
+  directives: const [NgClass],
+)
 class BsSlideComponent {
   /// Constructs a new slide injecting the parent carousel
   BsSlideComponent();

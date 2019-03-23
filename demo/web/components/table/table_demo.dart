@@ -1,19 +1,20 @@
 library table.table_demo;
 
 import 'dart:async';
-//import 'dart:convert';
 
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
+import 'package:angulardart_bootstrap/src/pagination/pagination.dart';
+import 'package:angulardart_bootstrap/src/table/table_directives.dart';
+import 'package:angulardart_bootstrap/src/tabsx/tabsx.dart';
 import 'package:dson/dson.dart';
 import 'package:http/browser_client.dart';
 import 'package:http/http.dart';
-import 'package:angulardart_bootstrap/components/pagination/pagination.dart';
-import 'package:angulardart_bootstrap/components/table/table_directives.dart';
-import 'package:angulardart_bootstrap/components/tabsx/tabsx.dart';
 import 'package:js_shims/js_shims.dart';
+
 import 'table_data.dart';
 import 'table_data_complex.dart';
+
 export 'table_data_complex.dart';
 
 part 'table_demo.g.dart';
@@ -35,19 +36,8 @@ class TableConfig {
   Timer debounceTimer;
 }
 
-@Component (selector: 'table-demo',
-    templateUrl: 'table_demo.html',
-    directives: const [
-      bsTableDirectives,
-      BsPaginationComponent,
-      bsTabsxDirectives,
-      coreDirectives,
-      formDirectives
-    ],
-    providers: [
-      ClassProvider(Client, useClass: BrowserClient)
-    ],
-    pipes: [commonPipes])
+@Component(
+    selector: 'table-demo', templateUrl: 'table_demo.html', directives: const [bsTableDirectives, BsPaginationComponent, bsTabsxDirectives, coreDirectives, formDirectives], providers: [ClassProvider(Client, useClass: BrowserClient)], pipes: [commonPipes])
 class TableDemoComponent implements OnInit {
   TableConfig mapConfig = TableConfig();
   TableConfig complexConfig = TableConfig();
@@ -85,31 +75,29 @@ class TableDemoComponent implements OnInit {
       filters[column.fieldName] = column.filterValue;
     }
 
-    mapConfig.rows = data.where((item) =>
-        filters.keys.every((fieldName) {
-          if (filters[fieldName] is String) {
-            return item[fieldName].contains(filters[fieldName]);
-          } else {
-            bool get = true, let = true;
-            if (filters[fieldName].containsKey('>=')) {
-              get = item[fieldName] >= filters[fieldName]['>='];
-            }
-            if (filters[fieldName].containsKey('<=')) {
-              let = item[fieldName] <= filters[fieldName]['<='];
-            }
-            return get && let;
-          }
-        })).toList();
+    mapConfig.rows = data
+        .where((item) => filters.keys.every((fieldName) {
+              if (filters[fieldName] is String) {
+                return item[fieldName].contains(filters[fieldName]);
+              } else {
+                bool get = true, let = true;
+                if (filters[fieldName].containsKey('>=')) {
+                  get = item[fieldName] >= filters[fieldName]['>='];
+                }
+                if (filters[fieldName].containsKey('<=')) {
+                  let = item[fieldName] <= filters[fieldName]['<='];
+                }
+                return get && let;
+              }
+            }))
+        .toList();
   }
 
   void filterRows() {
     if (falsey(mapConfig.filterString)) {
       mapConfig.rows = data;
     } else {
-      mapConfig.rows = data.where((item) =>
-          (item[mapConfig.filteredColumn] as String)
-              .contains(mapConfig.filterString)
-      ).toList();
+      mapConfig.rows = data.where((item) => (item[mapConfig.filteredColumn] as String).contains(mapConfig.filterString)).toList();
     }
   }
 
@@ -117,10 +105,7 @@ class TableDemoComponent implements OnInit {
     if (falsey(complexConfig.filterString)) {
       complexConfig.rows = dataComplex;
     } else {
-      complexConfig.rows = dataComplex.where((item) =>
-          (item[complexConfig.filteredColumn] as String)
-              .contains(complexConfig.filterString)
-      ).toList();
+      complexConfig.rows = dataComplex.where((item) => (item[complexConfig.filteredColumn] as String).contains(complexConfig.filterString)).toList();
     }
   }
 
@@ -133,11 +118,8 @@ class TableDemoComponent implements OnInit {
     remoteMapConfig.page = currentPage;
     remoteMapConfig.sortedColumn = column ?? remoteMapConfig.sortedColumn;
     var sortedColumn = remoteMapConfig.sortedColumn;
-    var uri = 'https://jsonplaceholder.typicode.com/posts?'
-        + (sortedColumn == null || sortedColumn.sort == 'NONE'
-            ? ''
-            : '_sort=${sortedColumn.fieldName}&_order=${sortedColumn.sort}&')
-        + '_page=${remoteMapConfig.page}&_limit=${remoteMapConfig.itemsPerPage}';
+    var uri =
+        'https://jsonplaceholder.typicode.com/posts?' + (sortedColumn == null || sortedColumn.sort == 'NONE' ? '' : '_sort=${sortedColumn.fieldName}&_order=${sortedColumn.sort}&') + '_page=${remoteMapConfig.page}&_limit=${remoteMapConfig.itemsPerPage}';
     var response;
     if (falsey(remoteMapConfig.filterString)) {
       response = await client.get(uri);
@@ -159,11 +141,9 @@ class TableDemoComponent implements OnInit {
     remoteComplexConfig.page = currentPage;
     remoteComplexConfig.sortedColumn = column ?? remoteComplexConfig.sortedColumn;
     var sortedColumn = remoteComplexConfig.sortedColumn;
-    var uri = 'https://jsonplaceholder.typicode.com/posts?'
-        + (sortedColumn == null || sortedColumn.sort == 'NONE'
-            ? ''
-            : '_sort=${sortedColumn.fieldName}&_order=${sortedColumn.sort}&')
-        + '_page=${remoteComplexConfig.page}&_limit=${remoteComplexConfig.itemsPerPage}';
+    var uri = 'https://jsonplaceholder.typicode.com/posts?' +
+        (sortedColumn == null || sortedColumn.sort == 'NONE' ? '' : '_sort=${sortedColumn.fieldName}&_order=${sortedColumn.sort}&') +
+        '_page=${remoteComplexConfig.page}&_limit=${remoteComplexConfig.itemsPerPage}';
     var response;
     if (falsey(remoteComplexConfig.filterString)) {
       response = await client.get(uri);

@@ -1,16 +1,13 @@
 import 'dart:html';
+
 import "package:angular/angular.dart";
-import 'package:angulardart_bootstrap/components/file_upload/file_upload.dart';
-import 'package:angulardart_bootstrap/components/progress/progress.dart';
+import 'package:angulardart_bootstrap/src/file_upload/file_upload.dart';
+import 'package:angulardart_bootstrap/src/progress/progress.dart';
 
 // const URL = '/api/';
 const URL = "https://evening-anchorage-3159.herokuapp.com/api/";
 
-@Component(selector: "file-upload-demo",
-    templateUrl: 'file_upload_demo.html',
-    styleUrls: ['file_upload_demo.css'],
-    directives: const [bsFileUploadDirectives, BsProgressComponent, coreDirectives],
-    pipes: const [DecimalPipe])
+@Component(selector: "file-upload-demo", templateUrl: 'file_upload_demo.html', styleUrls: ['file_upload_demo.css'], directives: const [bsFileUploadDirectives, BsProgressComponent, coreDirectives], pipes: const [DecimalPipe])
 class FileUploadDemoComponent {
   bool hasBaseDropZoneOver = false;
   bool hasAnotherDropZoneOver = false;
@@ -34,7 +31,7 @@ class FileUploadDemoComponent {
   save() {
     var formData = new FormData();
     formData.append('hello', 'hi');
-    for(var file in filesToUpload) {
+    for (var file in filesToUpload) {
       formData.appendBlob(file.name, file);
     }
 

@@ -1,10 +1,10 @@
-import 'package:angular/angular.dart';
-import 'package:angulardart_bootstrap/components/tooltip/tooltip.dart';
 import 'dart:html';
 
-@Component(
-    selector: 'bs-popover',
-    template: '''
+import 'package:angular/angular.dart';
+
+import '../tooltip/tooltip.dart';
+
+@Component(selector: 'bs-popover', template: '''
 <div class="arrow"></div>
 <h3 class="popover-header">
   {{heading}}
@@ -12,11 +12,11 @@ import 'dart:html';
 </h3>
 <div class="popover-body">
   <ng-content></ng-content>
-</div>''',
-    directives: const [coreDirectives])
+</div>''', directives: const [coreDirectives])
 class BsPopoverComponent extends BsTooltipComponent {
   /// Header of the popover
-  @Input() String heading;
+  @Input()
+  String heading;
 
   @HostBinding("class.bs-popover-top")
   bool get bsTooltipTop => placement == "top";

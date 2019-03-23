@@ -1,10 +1,8 @@
 import "package:angular/angular.dart";
 import 'package:angular_forms/angular_forms.dart';
-import 'package:angulardart_bootstrap/components/accordion/accordion.dart';
+import 'package:angulardart_bootstrap/src/accordion/accordion.dart';
 
-@Component(selector: "accordion-demo",
-    templateUrl: "accordion_demo.html",
-    directives: const [bsAccordionDirectives, coreDirectives, formDirectives])
+@Component(selector: "accordion-demo", templateUrl: "accordion_demo.html", directives: const [bsAccordionDirectives, coreDirectives, formDirectives])
 class AccordionDemo {
   bool oneAtATime = true;
 

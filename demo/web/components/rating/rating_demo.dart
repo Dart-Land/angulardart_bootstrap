@@ -1,10 +1,8 @@
 import "package:angular/angular.dart";
 import 'package:angular_forms/angular_forms.dart';
-import "package:angulardart_bootstrap/components/rating/rating.dart";
+import "package:angulardart_bootstrap/src/rating/rating.dart";
 
-@Component(selector: "rating-demo",
-    templateUrl: "rating_demo.html",
-    directives: const [BsRatingComponent, coreDirectives, formDirectives])
+@Component(selector: "rating-demo", templateUrl: "rating_demo.html", directives: const [BsRatingComponent, coreDirectives, formDirectives])
 class RatingDemo {
   num x = 5;
   num y = 2;

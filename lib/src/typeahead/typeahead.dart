@@ -3,17 +3,24 @@ import 'dart:html';
 
 import "package:angular/angular.dart";
 import 'package:angular_forms/angular_forms.dart';
-import 'package:angulardart_bootstrap/components/button/toggle.dart';
-import 'package:angulardart_bootstrap/components/dropdown/index.dart';
 import 'package:stream_transform/stream_transform.dart';
+
+import '../button/toggle.dart';
+import '../dropdown/index.dart';
 
 /// Creates a type-ahead component
 ///
 /// [demo](http://dart-land.github.io/angulardart_bootstrap/#typeahed)
 @Component(
-    selector: "bs-typeahead",
-    templateUrl: 'typeahead.html',
-    directives: const [bsDropdownDirectives, BsToggleButtonDirective, coreDirectives, formDirectives])
+  selector: "bs-typeahead",
+  templateUrl: 'typeahead.html',
+  directives: const [
+    bsDropdownDirectives,
+    BsToggleButtonDirective,
+    coreDirectives,
+    formDirectives,
+  ],
+)
 class BsTypeAheadComponent extends DefaultValueAccessor {
   /// binds to string user's input
   NgModel ngModel;
@@ -118,10 +125,7 @@ class BsTypeAheadComponent extends DefaultValueAccessor {
   BsTypeAheadComponent(this.ngModel, HtmlElement elementRef) : super(elementRef) {
     ngModel.valueAccessor = this;
 
-    _queryStream
-        .transform(debounce(new Duration(milliseconds: waitMs)))
-        .transform(switchMap((term) => source(term).asStream()))
-        .forEach((matchesAux) {
+    _queryStream.transform(debounce(new Duration(milliseconds: waitMs))).transform(switchMap((term) => source(term).asStream())).forEach((matchesAux) {
       matches = matchesAux.take(optionsLimit).toList();
       _loadingCtrl.add(loadingVal = false);
       if (matches.isEmpty) _noResultsCtrl.add(noResultsVal = true);
@@ -198,9 +202,7 @@ class BsTypeAheadComponent extends DefaultValueAccessor {
   }
 
   /// Returns the item as string
-  _itemString(/*String | Map*/ item) => item is String
-      ? item
-      : item is Map ? item[optionField] : throw new Exception('Type of item is not supported, please use a Map, SerializableMap or an String');
+  _itemString(/*String | Map*/ item) => item is String ? item : item is Map ? item[optionField] : throw new Exception('Type of item is not supported, please use a Map, SerializableMap or an String');
 
   /// highlights the matching part of the matched item. For example if user types "a" and the matched
   /// word is "Alaska" the result will be `<strong>A</strong>l<strong>a</strong>sk<strong>a</strong>`
@@ -212,8 +214,7 @@ class BsTypeAheadComponent extends DefaultValueAccessor {
 
   /// captures the whole query string and replace it with the string that will be used to match
   /// the results, for example if the capture is "a" the result will be \a
-  RegExp _escapeRegexp(String queryToEscape) =>
-      new RegExp(queryToEscape.replaceAll(new RegExp(r'([.?*+^$[\]\\(){}|-])'), r"\$1"), caseSensitive: false);
+  RegExp _escapeRegexp(String queryToEscape) => new RegExp(queryToEscape.replaceAll(new RegExp(r'([.?*+^$[\]\\(){}|-])'), r"\$1"), caseSensitive: false);
 
   /// makes the next item active/highlighted
   void _prevActiveMatch() {

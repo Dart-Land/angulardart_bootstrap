@@ -1,13 +1,10 @@
 import 'dart:async';
 
 import "package:angular/angular.dart";
-import 'package:angulardart_bootstrap/components/modal/modal.dart';
+import 'package:angulardart_bootstrap/src/modal/modal.dart';
 
-@Component(selector: "modal-demo",
-    templateUrl: "modal_demo.html",
-    directives: const [BsModalComponent])
+@Component(selector: "modal-demo", templateUrl: "modal_demo.html", directives: const [BsModalComponent])
 class ModalDemo {
-
   String modalAction;
 
   onModalClose(String _modalAction) {

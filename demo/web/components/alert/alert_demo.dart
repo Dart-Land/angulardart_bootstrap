@@ -1,10 +1,9 @@
 import 'dart:math';
 
 import "package:angular/angular.dart";
-import 'package:angulardart_bootstrap/components/alert/alert.dart';
+import 'package:angulardart_bootstrap/src/alert/alert.dart';
 
-@Component(
-    selector: "alert-demo", templateUrl: "alert_demo.html", directives: const [BsAlertComponent, coreDirectives])
+@Component(selector: "alert-demo", templateUrl: "alert_demo.html", directives: const [BsAlertComponent, coreDirectives])
 class AlertDemo {
   List alerts = [
     {"type": "danger", "msg": "Oh snap! Change a few things up and try submitting again.", 'dismissible': false},
@@ -17,11 +16,6 @@ class AlertDemo {
 
   addAlert() {
     var type = ['info', 'success', 'warning', 'danger'][new Random().nextInt(4)];
-    alerts.add({
-      "msg": "Another alert! This alert will dismiss in 3s",
-      'dismissible': true,
-      "type": type,
-      'timeout': 3000
-    });
+    alerts.add({"msg": "Another alert! This alert will dismiss in 3s", 'dismissible': true, "type": type, 'timeout': 3000});
   }
 }

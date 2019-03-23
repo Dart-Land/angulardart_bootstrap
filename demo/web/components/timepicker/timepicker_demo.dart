@@ -1,10 +1,8 @@
 import "package:angular/angular.dart";
 import 'package:angular_forms/angular_forms.dart';
-import "package:angulardart_bootstrap/components/timepicker/timepicker.dart";
+import "package:angulardart_bootstrap/src/timepicker/timepicker.dart";
 
-@Component(selector: "timepicker-demo",
-    templateUrl: 'timepicker_demo.html',
-    directives: const [BsTimePickerComponent, coreDirectives, formDirectives])
+@Component(selector: "timepicker-demo", templateUrl: 'timepicker_demo.html', directives: const [BsTimePickerComponent, coreDirectives, formDirectives])
 class TimepickerDemo {
   String hstep = '1';
   get hstepInt => int.parse(hstep);

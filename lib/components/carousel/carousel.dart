@@ -4,7 +4,7 @@ import "package:js_shims/js_shims.dart";
 import 'dart:async';
 
 /// List of Directives needed to create a carousel
-const bsCarouselComponents = const [BsCarouselComponent, BsSlideComponent];
+const bsCarouselComponents = [BsCarouselComponent, BsSlideComponent];
 
 @Deprecated('Renamed to "bsCarouselComponents"')
 const angulardart_bootstrap_CAROUSEL_DIRECTIVES = bsCarouselComponents;

@@ -8,9 +8,7 @@ import 'package:angular/angular.dart';
 /// Base specifications: [bootstrap 4](http://v4-alpha.getbootstrap.com/components/progress/)
 ///
 /// [demo](http://dart-land.github.io/angulardart_bootstrap/build/web/#progress)
-@Component(
-    selector: 'bs-progress',
-    template: '''
+@Component(selector: 'bs-progress', template: '''
 <div class="progress-bar"
      role="progressbar"
      aria-valuenow="0"
@@ -22,8 +20,7 @@ import 'package:angular/angular.dart';
               [ngTemplateOutletContext]="{\$implicit: percentage, value: value, max: max}"></template>
   </div>
 </div>
-<template [ngTemplateOutlet]="labelTemplate" [ngTemplateOutletContext]="{\$implicit: percentage}"></template>''',
-    directives: const [coreDirectives])
+<template [ngTemplateOutlet]="labelTemplate" [ngTemplateOutletContext]="{\$implicit: percentage}"></template>''', directives: const [coreDirectives])
 class BsProgressComponent implements OnInit, OnDestroy {
   /// if `true` changing `value` of progress bar will be animated (*note*: not supported by Bootstrap 4)
   @Input()
@@ -47,6 +44,7 @@ class BsProgressComponent implements OnInit, OnDestroy {
 
   HtmlElement _elementRef;
 
+  // ignore: unused_field
   Timer _resizeTimer;
 
   BsProgressComponent(this._elementRef);
@@ -61,8 +59,7 @@ class BsProgressComponent implements OnInit, OnDestroy {
 //    window.onResize.listen((e) {
 //      elementWidth = nativeElement.getComputedStyle().width;
 //    });
-    _resizeTimer =
-        Timer.periodic(Duration(milliseconds: 500), (_) => elementWidth = nativeElement.getComputedStyle().width);
+    _resizeTimer = Timer.periodic(Duration(milliseconds: 500), (_) => elementWidth = nativeElement.getComputedStyle().width);
   }
 
   @override

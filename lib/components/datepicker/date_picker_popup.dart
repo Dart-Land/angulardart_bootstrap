@@ -5,21 +5,14 @@ String _defaultLocale = 'en_US';
 
 /// Creates an [NgBsDatePickerPopup], this is a date-picker component that is popup when user clicks
 /// on the input box or on the button at the right of the input box.
-@Component (selector: "bs-date-picker-popup",
+@Component(
+    selector: "bs-date-picker-popup",
     templateUrl: 'date_picker_popup.html',
-    directives: const [
-      bsDropdownDirectives,
-      BsDatePickerComponent,
-      BsToggleButtonDirective,
-      coreDirectives,
-      formDirectives
-    ],
-    pipes: const [commonPipes]
-)
+    directives: [bsDropdownDirectives, BsDatePickerComponent, BsToggleButtonDirective, coreDirectives, formDirectives],
+    pipes: const [commonPipes])
 class BsDatePickerPopupComponent extends BsDatePickerBase {
   /// Constructs a DatePickerPopup
-  BsDatePickerPopupComponent(this.ngModel, HtmlElement elementRef)
-      : super(elementRef) {
+  BsDatePickerPopupComponent(this.ngModel, HtmlElement elementRef) : super(elementRef) {
     ngModel.valueAccessor = this;
   }
 
@@ -27,16 +20,20 @@ class BsDatePickerPopupComponent extends BsDatePickerBase {
   NgModel ngModel;
 
   /// if `true` shows the button bar at the bottom of the popup menu
-  @Input() bool showButtonBar = true;
+  @Input()
+  bool showButtonBar = true;
 
   /// provides the text that will be showed in the current-day button
-  @Input() String currentText = 'Today';
+  @Input()
+  String currentText = 'Today';
 
   /// provides the text that will be showed in the clear button
-  @Input() String clearText = 'Clear';
+  @Input()
+  String clearText = 'Clear';
 
   /// provides the text that will be displayed in the close button
-  @Input() String closeText = 'Close';
+  @Input()
+  String closeText = 'Close';
 
   /// if `true` the dropdown-menu will be open, and the date-picker visible
   bool isOpen;
@@ -44,10 +41,12 @@ class BsDatePickerPopupComponent extends BsDatePickerBase {
   /// format pattern used to show the input value
   ///
   /// See [DateFormat] for more information.
-  @Input() String format = defaultFormat;
+  @Input()
+  String format = defaultFormat;
 
   /// locale used to localize the output values
-  @Input() String locale = _defaultLocale;
+  @Input()
+  String locale = _defaultLocale;
 
   valueChanged(value) {
     var df = new DateFormat(format, locale);
